@@ -72,6 +72,9 @@ LLM-Engineering-Assignment/
 └── README.md
 ```
 
+### Report: https://drive.google.com/file/d/13C26ot4n6BsaT4mPaE8jYQSmDbQvZann/view?usp=sharing
+
+
 ## How to Run
 
 1. Clone this repository.
