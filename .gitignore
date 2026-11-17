@@ -1,0 +1,15 @@
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+.dist/
+*.pyc
+
+# RAG embedding cache
+Task_2_RAG/rag_workdir/cache/
+
+# Intermediate checkpoints
+Task_1_Fine_Tuning/adapter/checkpoint-*/
+
+# Large model files
+*.pt
+*.pth

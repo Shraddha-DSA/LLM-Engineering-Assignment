@@ -1,0 +1,7 @@
+model,split,n,exact_match,exact_95ci,parsable,schema_valid,acc_intent,acc_reason,acc_priority,acc_department,acc_order_id,macroF1_reason
+base_zero_shot,test_id,150,0.027,"[0.01, 0.07]",1.0,0.153,0.46,0.24,0.44,0.353,1.0,0.255
+base_zero_shot,test_ood,150,0.027,"[0.01, 0.07]",1.0,0.16,0.353,0.133,0.46,0.333,1.0,0.147
+base_5_shot,test_id,150,0.153,"[0.10, 0.22]",1.0,0.287,0.427,0.653,0.48,0.653,0.873,0.647
+base_5_shot,test_ood,150,0.127,"[0.08, 0.19]",1.0,0.347,0.36,0.4,0.58,0.593,0.933,0.38
+lora_main,test_id,150,1.0,"[0.98, 1.00]",1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+lora_main,test_ood,150,0.587,"[0.51, 0.66]",1.0,0.833,0.833,0.66,0.827,0.907,1.0,0.663

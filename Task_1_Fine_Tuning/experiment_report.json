@@ -1,0 +1,181 @@
+{
+  "task": "support message \u2192 JSON {intent,reason,priority,department,order_id}",
+  "versions": {
+    "torch": "2.14.1+cu130",
+    "transformers": "5.22.1",
+    "peft": "0.21.2",
+    "gpu": "Tesla T4"
+  },
+  "run": {
+    "tag": "main",
+    "trainable_params": 8798208,
+    "total_params": 502830976,
+    "train_seconds": 1255.8,
+    "peak_train_vram_gb": 10.17,
+    "best_val_loss": 0.0001,
+    "cfg": {
+      "model_name": "Qwen/Qwen2.5-0.5B-Instruct",
+      "use_qlora": false,
+      "grad_ckpt": false,
+      "lora_r": 16,
+      "lora_alpha": 32,
+      "lora_dropout": 0.05,
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "gate_proj",
+        "up_proj",
+        "down_proj"
+      ],
+      "lr": 0.0002,
+      "epochs": 3,
+      "per_device_bs": 8,
+      "grad_accum": 2,
+      "warmup_ratio": 0.05,
+      "max_len": 512,
+      "n_train": 1200,
+      "n_val": 150,
+      "n_test_id": 150,
+      "n_test_ood": 150,
+      "seed": 42,
+      "out_dir": "./support-lora"
+    }
+  },
+  "dataset_sizes": {
+    "train": 1200,
+    "val": 150,
+    "test_id": 150,
+    "test_ood": 150
+  },
+  "metrics": [
+    {
+      "model": "base_zero_shot",
+      "split": "test_id",
+      "n": 150,
+      "exact_match": 0.027,
+      "exact_95ci": "[0.01, 0.07]",
+      "parsable": 1.0,
+      "schema_valid": 0.153,
+      "acc_intent": 0.46,
+      "acc_reason": 0.24,
+      "acc_priority": 0.44,
+      "acc_department": 0.353,
+      "acc_order_id": 1.0,
+      "macroF1_reason": 0.255
+    },
+    {
+      "model": "base_zero_shot",
+      "split": "test_ood",
+      "n": 150,
+      "exact_match": 0.027,
+      "exact_95ci": "[0.01, 0.07]",
+      "parsable": 1.0,
+      "schema_valid": 0.16,
+      "acc_intent": 0.353,
+      "acc_reason": 0.133,
+      "acc_priority": 0.46,
+      "acc_department": 0.333,
+      "acc_order_id": 1.0,
+      "macroF1_reason": 0.147
+    },
+    {
+      "model": "base_5_shot",
+      "split": "test_id",
+      "n": 150,
+      "exact_match": 0.153,
+      "exact_95ci": "[0.10, 0.22]",
+      "parsable": 1.0,
+      "schema_valid": 0.287,
+      "acc_intent": 0.427,
+      "acc_reason": 0.653,
+      "acc_priority": 0.48,
+      "acc_department": 0.653,
+      "acc_order_id": 0.873,
+      "macroF1_reason": 0.647
+    },
+    {
+      "model": "base_5_shot",
+      "split": "test_ood",
+      "n": 150,
+      "exact_match": 0.127,
+      "exact_95ci": "[0.08, 0.19]",
+      "parsable": 1.0,
+      "schema_valid": 0.347,
+      "acc_intent": 0.36,
+      "acc_reason": 0.4,
+      "acc_priority": 0.58,
+      "acc_department": 0.593,
+      "acc_order_id": 0.933,
+      "macroF1_reason": 0.38
+    },
+    {
+      "model": "lora_main",
+      "split": "test_id",
+      "n": 150,
+      "exact_match": 1.0,
+      "exact_95ci": "[0.98, 1.00]",
+      "parsable": 1.0,
+      "schema_valid": 1.0,
+      "acc_intent": 1.0,
+      "acc_reason": 1.0,
+      "acc_priority": 1.0,
+      "acc_department": 1.0,
+      "acc_order_id": 1.0,
+      "macroF1_reason": 1.0
+    },
+    {
+      "model": "lora_main",
+      "split": "test_ood",
+      "n": 150,
+      "exact_match": 0.587,
+      "exact_95ci": "[0.51, 0.66]",
+      "parsable": 1.0,
+      "schema_valid": 0.833,
+      "acc_intent": 0.833,
+      "acc_reason": 0.66,
+      "acc_priority": 0.827,
+      "acc_department": 0.907,
+      "acc_order_id": 1.0,
+      "macroF1_reason": 0.663
+    }
+  ],
+  "error_buckets": [
+    {
+      "split": "test_id",
+      "category": "correct",
+      "n": 150
+    },
+    {
+      "split": "test_ood",
+      "category": "correct",
+      "n": 88
+    },
+    {
+      "split": "test_ood",
+      "category": "out_of_schema:reason_intent_inconsistent",
+      "n": 16
+    },
+    {
+      "split": "test_ood",
+      "category": "out_of_schema:reason_not_in_enum",
+      "n": 9
+    },
+    {
+      "split": "test_ood",
+      "category": "wrong_intent",
+      "n": 10
+    },
+    {
+      "split": "test_ood",
+      "category": "wrong_priority",
+      "n": 1
+    },
+    {
+      "split": "test_ood",
+      "category": "wrong_reason_within_intent",
+      "n": 26
+    }
+  ]
+}

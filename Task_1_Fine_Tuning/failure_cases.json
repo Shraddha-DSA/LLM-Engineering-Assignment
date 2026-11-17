@@ -1,0 +1,77 @@
+[
+  {
+    "model":"lora_main",
+    "split":"test_ood",
+    "input":"It died after one use.",
+    "expected":{
+      "intent":"return",
+      "reason":"defective_product",
+      "priority":"high",
+      "department":"returns",
+      "order_id":null
+    },
+    "raw":"{\"intent\":\"return\",\"reason\":\"damaged_product\",\"priority\":\"high\",\"department\":\"returns\",\"order_id\":null}",
+    "parsable":true,
+    "schema_errors":[
+
+    ],
+    "schema_valid":true,
+    "exact":false,
+    "acc_intent":true,
+    "acc_reason":false,
+    "acc_priority":true,
+    "acc_department":true,
+    "acc_order_id":true,
+    "category":"wrong_reason_within_intent"
+  },
+  {
+    "model":"lora_main",
+    "split":"test_ood",
+    "input":"Any news on the money you are returning to me. Please assist me.",
+    "expected":{
+      "intent":"refund",
+      "reason":"refund_status",
+      "priority":"medium",
+      "department":"billing",
+      "order_id":null
+    },
+    "raw":"{\"intent\":\"return\",\"reason\":\"changed_mind\",\"priority\":\"low\",\"department\":\"returns\",\"order_id\":null}",
+    "parsable":true,
+    "schema_errors":[
+
+    ],
+    "schema_valid":true,
+    "exact":false,
+    "acc_intent":false,
+    "acc_reason":false,
+    "acc_priority":false,
+    "acc_department":false,
+    "acc_order_id":true,
+    "category":"wrong_intent"
+  },
+  {
+    "model":"lora_main",
+    "split":"test_ood",
+    "input":"Regarding ORD-82591: Half of what was in the parcel is smashed. I need this sorted ASAP.",
+    "expected":{
+      "intent":"return",
+      "reason":"damaged_product",
+      "priority":"high",
+      "department":"returns",
+      "order_id":"ORD-82591"
+    },
+    "raw":"{\"intent\":\"return\",\"reason\":\"half_of_parcel_is_smashed\",\"priority\":\"high\",\"department\":\"returns\",\"order_id\":\"ORD-82591\"}",
+    "parsable":true,
+    "schema_errors":[
+      "reason_not_in_enum"
+    ],
+    "schema_valid":false,
+    "exact":false,
+    "acc_intent":true,
+    "acc_reason":false,
+    "acc_priority":true,
+    "acc_department":true,
+    "acc_order_id":true,
+    "category":"out_of_schema:reason_not_in_enum"
+  }
+]
